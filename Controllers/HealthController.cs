@@ -21,7 +21,7 @@ namespace AlgoFit.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(typeof(object), 400)]
         [ProducesResponseType(401)]
-        public ActionResult HealthCheck(LoginDTO login)
+        public ActionResult HealthCheck()
         {
             return Ok();
         }
