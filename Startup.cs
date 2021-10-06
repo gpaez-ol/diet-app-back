@@ -35,10 +35,10 @@ namespace AlgoFit
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AlgoFit", Version = "v1" });
             });
-             services.AddDbContext<AlgoFitContext>(
-                opt => ConfigureDatabaseService(opt),
-                ServiceLifetime.Scoped
-            );
+            //  services.AddDbContext<AlgoFitContext>(
+            //     opt => ConfigureDatabaseService(opt),
+            //     ServiceLifetime.Scoped
+            // );
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
@@ -79,8 +79,8 @@ namespace AlgoFit
            
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
-                var context = serviceScope.ServiceProvider.GetRequiredService<AlgoFitContext>();
-                context.Database.EnsureCreated();
+                // var context = serviceScope.ServiceProvider.GetRequiredService<AlgoFitContext>();
+                // context.Database.EnsureCreated();
                 // TODO: Add Data Init DataInit.Init(context);
             }
         }
