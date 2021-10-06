@@ -1,0 +1,24 @@
+# Do not change version. This is the version of aws buildspec, not the version of your buldspec file.
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      dotnet: 5.0
+  pre_build:
+    commands:
+      - dotnet restore
+  build:
+    commands:
+      - dotnet publish -o publish 
+  post_build:
+    commands:
+      - cd publish
+      - tar -zcvf server.tar.gz *
+artifacts:
+  files:
+    - aws/appspec.yml
+    - aws/start_server.sh
+    - aws/ecosystem.config.js
+    - publish/server.tar.gz
+  discard-paths: yes
+  name: server
