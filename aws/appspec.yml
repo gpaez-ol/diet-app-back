@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /qa/code
+    destination: /home/ec2-user/code
 hooks:
   ApplicationStart:
     - location: start_server.sh
