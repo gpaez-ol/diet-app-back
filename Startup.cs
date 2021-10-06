@@ -49,7 +49,10 @@ namespace AlgoFit
             if (!String.IsNullOrEmpty(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")))
                 connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
 
-            optionsAction.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+            optionsAction.UseMySql(connectionString,mySqlOptions =>
+            {
+                mySqlOptions.ServerVersion(new Version(5, 7), ServerType.MySql);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
