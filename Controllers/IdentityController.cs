@@ -28,7 +28,7 @@ namespace AlgoFit.Controllers
                 FirstName = "John",
                 LastName = "Doe",
                 Avatar = "https://pbs.twimg.com/profile_images/1442676072831537155/56uDoaxL_400x400.jpg",
-                Type = EnumHelper.GetEnumText(UserType.Customer).ToLowerCase()
+                Type = EnumHelper.GetEnumText(UserType.Customer)
             };
             return Ok(result);
         }
