@@ -1,7 +1,7 @@
 #!/bin/bash
 source ~/.bashrc
 
-cd ~/efs-shared/
+cd home/ec2-user
 
 mkdir -p qa
 rm -rf ./qa/*
