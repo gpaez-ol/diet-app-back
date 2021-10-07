@@ -10,14 +10,14 @@ using AlgoFit.Utils.Enums;
 namespace AlgoFit.Controllers
 {
     [ApiController]
-    [Route("identity")]
-    public class IdentityController : ControllerBase
+    [Route("login")]
+    public class LoginController : ControllerBase
     {
-        public IdentityController()
+        public LoginController()
         {
         }
 
-        [HttpPost("login")]
+        [HttpPost]
         [ProducesResponseType(typeof(ProfileDTO), 200)]
         [ProducesResponseType(typeof(object), 400)]
         [ProducesResponseType(401)]
@@ -27,21 +27,6 @@ namespace AlgoFit.Controllers
             var result = new ProfileDTO{
                 FirstName = "John",
                 LastName = "Doe",
-                Avatar = "https://pbs.twimg.com/profile_images/1442676072831537155/56uDoaxL_400x400.jpg",
-                Type = EnumHelper.GetEnumText(UserType.Customer)
-            };
-            return Ok(result);
-        }
-        [HttpPost("signup")]
-        [ProducesResponseType(typeof(ProfileDTO), 200)]
-        [ProducesResponseType(typeof(object), 400)]
-        [ProducesResponseType(401)]
-        public ActionResult Signup(SignUpDTO signup)
-        {
-            // TODO: Add logic to do an actual signup
-            var result = new ProfileDTO{
-                FirstName = signup.FirstName,
-                LastName = signup.LastName,
                 Avatar = "https://pbs.twimg.com/profile_images/1442676072831537155/56uDoaxL_400x400.jpg",
                 Type = EnumHelper.GetEnumText(UserType.Customer)
             };
