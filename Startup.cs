@@ -98,8 +98,8 @@ namespace AlgoFit
            
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
-                //  var context = serviceScope.ServiceProvider.GetRequiredService<AlgoFitContext>();
-                //  context.Database.EnsureCreated();
+                 var context = serviceScope.ServiceProvider.GetRequiredService<AlgoFitContext>();
+                 context.Database.EnsureCreated();
                 // TODO: Add Data Init DataInit.Init(context);
             }
         }
