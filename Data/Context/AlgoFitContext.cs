@@ -9,7 +9,7 @@ using AlgoFit.Data.Models;
 
 namespace AlgoFit.Data.Context
 {
-    public class AlgoFitContext :DbContext
+    public class AlgoFitContext : DbContext
     {
         public readonly IServiceProvider ServiceProvider;
         private readonly IHttpContextAccessor httpContextAccessor;

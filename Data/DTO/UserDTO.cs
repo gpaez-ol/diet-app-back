@@ -51,4 +51,11 @@ namespace AlgoFit.Data.DTO
         public string Avatar { get; set; }
         public string Type { get; set; }
     }
+    public class UserDTO
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Avatar { get; set; }
+        public string Type { get; set; }
+    }
 }

@@ -1,20 +1,19 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using AlgoFit.Data.Context;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using AlgoFit.Repositories.Manager;
+using AlgoFit.WebAPI.Logic;
+using AutoMapper;
+using AlgoFit.Errors.Managers;
 namespace AlgoFit
 {
     public class Startup
@@ -35,11 +34,15 @@ namespace AlgoFit
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AlgoFit", Version = "v1" });
             });
-            //  services.AddDbContext<AlgoFitContext>(
-            //     opt => ConfigureDatabaseService(opt),
-            //     ServiceLifetime.Scoped
-            // );
+              services.AddDbContext<AlgoFitContext>(
+                 opt => ConfigureDatabaseService(opt),
+                 ServiceLifetime.Scoped
+             );
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<RepositoryManager>();
+            services.AddScoped<SessionLogic>();
+            services.AddScoped<UserLogic>();
         }
 
         public void ConfigureDatabaseService(DbContextOptionsBuilder optionsAction)
@@ -60,7 +63,7 @@ namespace AlgoFit
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseExceptionHandler(err => ExceptionHandler.UseAlgoFitExceptionHandler(err));
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AlgoFit v1"));
             }
@@ -79,8 +82,8 @@ namespace AlgoFit
            
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
-                // var context = serviceScope.ServiceProvider.GetRequiredService<AlgoFitContext>();
-                // context.Database.EnsureCreated();
+                //  var context = serviceScope.ServiceProvider.GetRequiredService<AlgoFitContext>();
+                //  context.Database.EnsureCreated();
                 // TODO: Add Data Init DataInit.Init(context);
             }
         }
