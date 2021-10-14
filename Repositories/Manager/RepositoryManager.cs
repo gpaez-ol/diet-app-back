@@ -6,6 +6,7 @@ namespace AlgoFit.Repositories.Manager
     {
         private UserRepository _userRepository;
         private IngredientRepository _ingredientRepository;
+        private MealRepository _mealRepository;
         private AlgoFitContext _context;
         public RepositoryManager(AlgoFitContext context)
         {
@@ -32,6 +33,17 @@ namespace AlgoFit.Repositories.Manager
                     _ingredientRepository = new IngredientRepository(_context);
                 }
                 return _ingredientRepository;
+            }
+        }
+        public MealRepository MealRepository
+        {
+            get
+            {
+                if (_mealRepository == null)
+                {
+                    _mealRepository = new MealRepository(_context);
+                }
+                return _mealRepository;
             }
         }
         public void Dispose()

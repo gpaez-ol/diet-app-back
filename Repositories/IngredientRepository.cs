@@ -40,9 +40,9 @@ namespace AlgoFit.Repositories
 
             try
             {
-                var updatedUser = _context.Update(newIngredient);
+                var updatedIngredient = _context.Update(newIngredient);
 
-                return Task.FromResult(updatedUser.Entity);
+                return Task.FromResult(updatedIngredient.Entity);
             }
             catch (Exception ex)
             {
