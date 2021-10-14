@@ -64,6 +64,7 @@ namespace AlgoFit
             services.AddScoped<SessionLogic>();
             services.AddScoped<UserLogic>();
             services.AddScoped<IngredientLogic>();
+            services.AddScoped<MealLogic>();
         }
 
         public void ConfigureDatabaseService(DbContextOptionsBuilder optionsAction)
@@ -83,6 +84,7 @@ namespace AlgoFit
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseExceptionHandler(err => ExceptionHandler.UseAlgoFitExceptionHandler(err));
+            app.UseCors("CorsPolicyAllowedHostWithCredentials");
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AlgoFit v1"));
         
