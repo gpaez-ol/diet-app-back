@@ -14,6 +14,10 @@ using AlgoFit.Repositories.Manager;
 using AlgoFit.WebAPI.Logic;
 using AutoMapper;
 using AlgoFit.Errors.Managers;
+using AlgoFit.Security.Utils;
+using AlgoFit.Security.Extensions;
+using AlgoFit.BaseEntities;
+
 namespace AlgoFit
 {
     public class Startup
@@ -24,12 +28,24 @@ namespace AlgoFit
         }
 
         public IConfiguration Configuration { get; }
+        private CookieOptions CookieSecurityOptions { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            var tokenOptions = new TokenOptions(Configuration["Jwt:Issuer"],Configuration["Jwt:Key"],Configuration.GetValue<double>("Jwt:Expiration"));
+            var cookieOptions = new CookieOptions{
+                Domain = Configuration["Cookie:Domain"],
+                SameSite = Configuration.GetValue<SameSiteMode>("Cookie:SameSite"),
+                HttpOnly = Configuration.GetValue<bool>("Cookie:HttpOnly"),
+                Secure = Configuration.GetValue<bool>("Cookie:Secure")
+            };
             services.AddControllers();
+            services.AddJwtWithProtectedCookie
+                (
+                    Authorization.CreateTokenOptions(tokenOptions),
+                    Authorization.CreateCookieOptions(cookieOptions)
+                );
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AlgoFit", Version = "v1" });

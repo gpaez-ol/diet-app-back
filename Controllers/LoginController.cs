@@ -26,7 +26,7 @@ namespace AlgoFit.Controllers
         [ProducesResponseType(401)]
         public async Task<ActionResult> Login(LoginDTO login)
         {
-           var result = await _sessionLogic.Login(login);
+           var result = await _sessionLogic.Login(login,Response);
         return Ok(result);
         }
     }
