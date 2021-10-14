@@ -15,6 +15,7 @@ using AlgoFit.Errors.Managers;
 using AlgoFit.Security.Utils;
 using AlgoFit.Security.Extensions;
 using AlgoFit.BaseEntities;
+using NFact.WebAPI.Logic;
 
 namespace AlgoFit
 {
@@ -62,6 +63,7 @@ namespace AlgoFit
             services.AddScoped<RepositoryManager>();
             services.AddScoped<SessionLogic>();
             services.AddScoped<UserLogic>();
+            services.AddScoped<IngredientLogic>();
         }
 
         public void ConfigureDatabaseService(DbContextOptionsBuilder optionsAction)
