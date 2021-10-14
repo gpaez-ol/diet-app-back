@@ -8,7 +8,7 @@ using AlgoFit.Utils.Pagination;
 using AlgoFit.Utils.Pagination.Interfaces;
 using AutoMapper;
 using Outland.Utils.Pagination;
-namespace NFact.WebAPI.Logic
+namespace AlgoFit.WebAPI.Logic
 {
     public class IngredientLogic
     {

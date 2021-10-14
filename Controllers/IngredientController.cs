@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using AlgoFit.Data.DTO;
 using AlgoFit.Utils.Pagination.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using NFact.WebAPI.Logic;
+using AlgoFit.WebAPI.Logic;
 using Outland.Utils.Pagination;
 
 namespace AlgoFit.WebAPI.Controllers

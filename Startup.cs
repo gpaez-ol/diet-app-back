@@ -15,7 +15,7 @@ using AlgoFit.Errors.Managers;
 using AlgoFit.Security.Utils;
 using AlgoFit.Security.Extensions;
 using AlgoFit.BaseEntities;
-using NFact.WebAPI.Logic;
+using AlgoFit.WebAPI.Logic;
 
 namespace AlgoFit
 {
@@ -66,6 +66,7 @@ namespace AlgoFit
             services.AddScoped<IngredientLogic>();
             services.AddScoped<MealLogic>();
             services.AddScoped<DietLogic>();
+            services.AddScoped<BiometricLogic>();
         }
 
         public void ConfigureDatabaseService(DbContextOptionsBuilder optionsAction)

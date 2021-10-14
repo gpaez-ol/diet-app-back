@@ -20,7 +20,7 @@ namespace AlgoFit.Data.Models
         /// Biometric Height
         /// </summary>
         [Required]
-        public double height { get; set; }
+        public double Height { get; set; }
 
         /// <summary> 
         /// Date the Measurement was Taken

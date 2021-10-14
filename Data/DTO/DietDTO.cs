@@ -9,6 +9,7 @@ namespace AlgoFit.Data.DTO
     {
         public Guid Id {get;set;}
         public string Name { get; set; } // TODO; Add category
+        public string ImageRef{ get; set; }
     }
     public class DietCreateDTO 
     {
@@ -24,6 +25,7 @@ namespace AlgoFit.Data.DTO
         public string Description { get; set; }
         public ICollection<Guid> Categories { get; set; }
         public ICollection<MealItemDTO> Meals { get; set; }
-         public DietType Type { get; set; }
+        public DietType Type { get; set; }
+        public string ImageRef{ get; set; }
     }
 }

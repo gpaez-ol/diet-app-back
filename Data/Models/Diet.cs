@@ -39,6 +39,10 @@ namespace AlgoFit.Data.Models
         /// The Categories for the Diet
         /// </summary>
         public ICollection<DietMeal> Meals { get; set; }
+        /// <summary>
+        /// Image Ref
+        /// </summary>
+        public string ImageRef { get; set; }
     }
 
     public enum DietType
