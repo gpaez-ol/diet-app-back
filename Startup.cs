@@ -1,11 +1,9 @@
 using System;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using AlgoFit.Data.Context;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
@@ -50,6 +48,11 @@ namespace AlgoFit
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AlgoFit", Version = "v1" });
             });
+            services.AddCorsPolicyAllowedHostWithCredentials(
+                Configuration.GetSection("AllowedHosts").Get<string[]>(),
+                new string[] { "GET", "PUT", "POST", "DELETE" },
+                new string[] { "Content-Type", "Content-Length" }
+            );
               services.AddDbContext<AlgoFitContext>(
                  opt => ConfigureDatabaseService(opt),
                  ServiceLifetime.Scoped
