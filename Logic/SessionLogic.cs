@@ -1,5 +1,6 @@
 using AlgoFit.Data.DTO;
 using AlgoFit.Data.Models;
+using AlgoFit.Errors;
 using AlgoFit.Repositories.Manager;
 using AlgoFit.Security.Utils;
 using AlgoFit.Utils.Enums;
@@ -35,7 +36,7 @@ namespace AlgoFit.WebAPI.Logic
             UserCredential credential = await _repositoryManager.UserRepository.GetCredentialsByUsernameAsync(login.Email);
             if (credential == null)
             {
-                throw new ArgumentNullException("User doesnt exist");
+                throw new AlgoFitError(403,"User not found");
             }
 
             if (ComparePassword(login.Password, credential.Password))
