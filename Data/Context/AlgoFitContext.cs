@@ -34,7 +34,6 @@ namespace AlgoFit.Data.Context
         public DbSet<Meal> Meals { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserCredential> UserCredentials { get; set; }
-        public DbSet<UserDiet> UserDiets { get; set; }
         
         
 
@@ -45,7 +44,6 @@ namespace AlgoFit.Data.Context
             modelBuilder.ApplyConfiguration(new DietMealConfiguration());
             modelBuilder.ApplyConfiguration(new MealIngredientConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
-            modelBuilder.ApplyConfiguration(new UserDietConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

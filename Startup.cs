@@ -15,7 +15,6 @@ using AlgoFit.Errors.Managers;
 using AlgoFit.Security.Utils;
 using AlgoFit.Security.Extensions;
 using AlgoFit.BaseEntities;
-using AlgoFit.WebAPI.Logic;
 
 namespace AlgoFit
 {

@@ -56,7 +56,8 @@ namespace AlgoFit.Data.Models
         /// <summary>
         /// The Diets for the given user
         /// </summary>
-        public ICollection<UserDiet> Diets { get; set; }
+        public Guid? DietId { get; set;}
+        public Diet Diet { get; set;}
     }
 
     public enum UserType

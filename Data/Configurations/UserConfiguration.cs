@@ -13,6 +13,10 @@ namespace AlgoFit.Data.Configurations
             builder.HasOne(u => u.UserCredential)
                 .WithOne()
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(u => u.Diet)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
