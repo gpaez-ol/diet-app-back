@@ -21,6 +21,10 @@ namespace AlgoFit.Data.Models
         /// </summary>
         [Required]
         public double Height { get; set; }
+        /// <summary> 
+        /// Fat Percentage
+        /// </summary>
+        public double FatIndex { get; set; }
 
         /// <summary> 
         /// Date the Measurement was Taken

@@ -66,7 +66,8 @@ namespace AlgoFit.Repositories
                     .Select( b => new BiometricItemDTO
                     {
                         Id = b.Id,
-                        BodyMassIndex = b.Weight/b.Height
+                        BodyMassIndex = b.Weight/b.Height,
+                        Date = b.Date.ToShortDateString()
                     });
         }
         public Task<Biometric> DeleteAsync(Biometric biometric)

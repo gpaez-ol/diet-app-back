@@ -14,12 +14,13 @@ namespace AlgoFit.Data.DTO
     {
         public double Weight { get; set; }
         public double Height { get; set; }
+        public double FatIndex { get; set; }
     }
     public class BiometricDTO
     {
         public double Weight { get; set; }
         public double Height { get; set; }
         public DateTime Date { get; set; }
-         public User User { get; set; }
+        public double FatIndex { get; set; }
     }
 }

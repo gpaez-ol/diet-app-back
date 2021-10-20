@@ -35,6 +35,7 @@ namespace AlgoFit.WebAPI.Logic
                     {
                         Weight = newBiometric.Weight,
                         Height = newBiometric.Height,
+                        FatIndex = newBiometric.FatIndex,
                         Date = date,
                         UserId= userId
                     };
