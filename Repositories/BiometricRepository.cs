@@ -52,7 +52,6 @@ namespace AlgoFit.Repositories
         public async Task<Biometric> GetByIdAsync(Guid id)
         {
             return await _context.Biometrics.Where(b => b.Id == id)
-                        .Include(b => b.User)
                         .FirstOrDefaultAsync();
         }
         public async Task<ICollection<Biometric>> GetAllAsync()
