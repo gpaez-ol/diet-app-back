@@ -29,7 +29,7 @@ namespace AlgoFit.Repositories
                 throw new Exception("User could not be saved", ex);
             }
         }
-        public User UpdateAsync(User newUser)
+        public async Task<User> UpdateAsync(User newUser)
         {
             if (newUser == null)
             {
@@ -40,7 +40,7 @@ namespace AlgoFit.Repositories
             {
                 var updatedUser = _context.Update(newUser);
 
-                return updatedUser.Entity;
+                return await Task.FromResult(updatedUser.Entity);
             }
             catch (Exception ex)
             {
@@ -59,7 +59,7 @@ namespace AlgoFit.Repositories
         }
         public async Task<User> GetUserByIdAsync(Guid id)
         {
-            return (await GetAllAsync()).FirstOrDefault(x => x.Id == id);
+            return (await GetAllAsync()).Include(u => u.Diet).FirstOrDefault(x => x.Id == id);
         }
         public async Task<IQueryable<User>> GetAllAsync()
         {

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using AlgoFit.Data.Models;
 
@@ -51,6 +52,7 @@ namespace AlgoFit.Data.DTO
         public string LastName { get; set; }
         public string Avatar { get; set; }
         public string Type { get; set; }
+        public Diet Diet { get; set;}
     }
     public class UserDTO
     {

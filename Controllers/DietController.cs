@@ -90,5 +90,19 @@ namespace AlgoFit.WebAPI.Controllers
             await _dietLogic.DeleteDiet(dietId);
             return Ok();
         }
+
+        /// <summary>
+        /// Assign Diet to  User
+        /// </summary>
+        /// <returns>Ok()</returns>
+        [ProducesResponseType(200)]
+        [ProducesResponseType(typeof(object), 400)]
+        [ProducesResponseType(401)]
+        [HttpPut("{dietId}/user/{userId}")]
+        public async Task<ActionResult> SubscribeToDiet(Guid dietId,Guid userId)
+        {
+            await _dietLogic.SubscribeToDiet(dietId,userId);
+            return Ok();
+        }
     }
 }

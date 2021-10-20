@@ -85,5 +85,16 @@ namespace AlgoFit.WebAPI.Logic
             var dietDTO = _mapper.Map<DietDTO>(diet);
             return dietDTO;
         }
+        public async Task SubscribeToDiet(Guid dietId,Guid userId)
+        {
+            var user = await _repositoryManager.UserRepository.GetUserByIdAsync(userId);
+            var diet = await _repositoryManager.DietRepository.GetByIdAsync(dietId);
+            if(diet != null)
+            {
+                user.DietId = dietId;
+            }
+            await _repositoryManager.UserRepository.UpdateAsync(user);
+            _repositoryManager.Save();
+        }
     }
 }
