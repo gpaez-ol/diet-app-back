@@ -36,7 +36,7 @@ namespace AlgoFit.Data.Models
         public ICollection<DietCategory> Categories { get; set; }
 
         /// <summary>
-        /// The Categories for the Diet
+        /// The Meals for the Diet
         /// </summary>
         public ICollection<DietMeal> Meals { get; set; }
         /// <summary>

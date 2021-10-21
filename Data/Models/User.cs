@@ -58,6 +58,7 @@ namespace AlgoFit.Data.Models
         /// </summary>
         public Guid? DietId { get; set;}
         public Diet Diet { get; set;}
+        public DateTime? DietStartedAt { get; set;}
     }
 
     public enum UserType

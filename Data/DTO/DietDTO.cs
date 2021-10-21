@@ -11,12 +11,19 @@ namespace AlgoFit.Data.DTO
         public string Name { get; set; } // TODO; Add category
         public string ImageRef{ get; set; }
     }
+    public class DietMealDTO 
+    {
+        public Guid Id { get; set;}
+        public int MealNumber {get; set;}
+    }
     public class DietCreateDTO 
     {
         public string Name { get; set; }
         [MaxLength(500)]
         public string Description { get; set; }
         public DietType Type { get; set; }
+        public List<Guid> CategoryIds {get; set;}
+        public List<DietMealDTO > DietMeals {get; set;}
     }
     public class DietDTO
     {
