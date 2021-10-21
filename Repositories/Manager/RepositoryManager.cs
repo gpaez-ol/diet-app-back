@@ -8,6 +8,7 @@ namespace AlgoFit.Repositories.Manager
         private IngredientRepository _ingredientRepository;
         private MealRepository _mealRepository;
         private DietRepository _dietRepository;
+        private CategoryRepository _categoryRepository;
         private BiometricRepository _biometricRepository;
         private AlgoFitContext _context;
         public RepositoryManager(AlgoFitContext context)
@@ -24,6 +25,17 @@ namespace AlgoFit.Repositories.Manager
                     _userRepository = new UserRepository(_context);
                 }
                 return _userRepository;
+            }
+        }
+        public CategoryRepository CategoryRepository
+        {
+            get
+            {
+                if (_categoryRepository == null)
+                {
+                    _categoryRepository = new CategoryRepository(_context);
+                }
+                return _categoryRepository;
             }
         }
         public IngredientRepository IngredientRepository

@@ -66,6 +66,7 @@ namespace AlgoFit
             services.AddScoped<MealLogic>();
             services.AddScoped<DietLogic>();
             services.AddScoped<BiometricLogic>();
+            services.AddScoped<CategoryLogic>();
         }
 
         public void ConfigureDatabaseService(DbContextOptionsBuilder optionsAction)

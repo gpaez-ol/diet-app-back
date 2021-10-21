@@ -21,7 +21,6 @@ namespace AlgoFit.Data.Models
         /// <summary> 
         /// Description of the Category
         /// </summary>
-        [Required]
         [MaxLength(500)]
         public string Description { get; set; }
     }
