@@ -23,12 +23,12 @@ namespace AlgoFit.Controllers
         [ProducesResponseType(typeof(ProfileDTO), 200)]
         [ProducesResponseType(typeof(object), 400)]
         [ProducesResponseType(401)]
-        public async Task<ActionResult> SignupAsync(SignUpDTO signup)
+        public async Task<ActionResult<ProfileDTO>> SignupAsync(SignUpDTO signup)
         {
             try
             {
-                User createdUser = await _userLogic.CreateUser(signup);
-                return Ok();
+               ProfileDTO createdUser = await _userLogic.CreateUser(signup);
+                return Ok(createdUser);
             }
             catch (Exception e)
             {
