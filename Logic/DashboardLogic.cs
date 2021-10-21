@@ -17,13 +17,20 @@ namespace AlgoFit.WebAPI.Logic
         }
         public async Task<DashboardDTO>  GetDashboard(Guid userId)
         {
+            var user = await _repositoryManager.UserRepository.GetUserByIdAsync(userId);
+            var eatenCalories =  0.0;
+            if(user.Diet != null)
+            {
+                var passedDays = (DateTime.Today - user.DietStartedAt.GetValueOrDefault()).Days;
+;                eatenCalories = user.Diet.Meals.OrderBy(dm => dm.MealNumber).Take(passedDays*3).Sum(dm => dm.Meal.Kilocalories);
+            }
             var biometrics = await _repositoryManager.BiometricRepository.GetAllByUserIdAsync(userId);
             var latestBiometric = biometrics.OrderByDescending(b => b.Date)
                             .Select(b => 
                             new BiometricDashboardDTO{
                                 Weight = b.Weight,
                                 Height = b.Height,
-                                CaloriesConsumed = 0,
+                                CaloriesConsumed = eatenCalories,
                                 FatIndex = b.FatIndex
                             } ).FirstOrDefault();
             var biometricHistory= biometrics.Select( b => new SimpleBiometricDTO {

@@ -66,7 +66,8 @@ namespace AlgoFit.Repositories
                     .Select( m => new DietItemDTO
                     {
                         Id = m.Id,
-                        Name = m.Name
+                        Name = m.Name,
+                        ImageRef = m.ImageRef
                     });
         }
         public Task<Diet> DeleteAsync(Diet diet)
