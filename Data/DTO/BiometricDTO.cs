@@ -23,4 +23,17 @@ namespace AlgoFit.Data.DTO
         public DateTime Date { get; set; }
         public double FatIndex { get; set; }
     }
+    public class BiometricDashboardDTO
+    {
+        public double Weight { get; set; }
+        public double Height { get; set; }
+        public double CaloriesConsumed { get; set; }
+        public double FatIndex { get; set; }
+    }
+    public class SimpleBiometricDTO
+    {
+        public double Weight { get; set; }
+        public double Height { get; set; }
+        public DateTime Date { get; set; }
+    }
 }

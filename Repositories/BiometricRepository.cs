@@ -58,6 +58,10 @@ namespace AlgoFit.Repositories
         {
            return await _context.Biometrics.ToListAsync();
         }
+        public async Task<ICollection<Biometric>> GetAllByUserIdAsync(Guid userId)
+        {
+           return await _context.Biometrics.Where(b => b.UserId == userId).ToListAsync();
+        }
         public IQueryable<BiometricItemDTO> GetAllAsDTOs(Guid userId)
         {
             return _context.Biometrics
