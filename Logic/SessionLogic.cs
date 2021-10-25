@@ -51,7 +51,7 @@ namespace AlgoFit.WebAPI.Logic
             }
             else
             {
-                throw new ArgumentNullException("Password doesnt match");
+                throw new AlgoFitError(401,"Password doesnt match");
             }
         }
         public List<Claim> GetUserClaims(User user)
