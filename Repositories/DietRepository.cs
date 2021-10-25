@@ -60,15 +60,23 @@ namespace AlgoFit.Repositories
         {
            return await _context.Diets.ToListAsync();
         }
-        public IQueryable<DietItemDTO> GetAllAsDTOs()
+        public IQueryable<DietItemDTO> GetAllAsDTOs(List<Guid> categoryIds)
         {
             return _context.Diets
+                    .Include(d => d.Categories)
                     .Select( m => new DietItemDTO
                     {
                         Id = m.Id,
                         Name = m.Name,
-                        ImageRef = m.ImageRef
+                        ImageRef = m.ImageRef,
+                        CategoryIds = m.Categories.Select(c => c.CategoryId.GetValueOrDefault()).ToList()
                     });
+        }
+        public IQueryable<Diet> GetAllAsQueryable()
+        {
+            return _context.Diets
+                    .Include(d => d.Categories)
+                    .AsQueryable();
         }
         public Task<Diet> DeleteAsync(Diet diet)
         {

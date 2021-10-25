@@ -5,6 +5,7 @@ using AlgoFit.Utils.Pagination.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using AlgoFit.WebAPI.Logic;
 using Outland.Utils.Pagination;
+using System.Collections.Generic;
 
 namespace AlgoFit.WebAPI.Controllers
 {
@@ -27,9 +28,9 @@ namespace AlgoFit.WebAPI.Controllers
         [ProducesResponseType(typeof(object), 400)]
         [ProducesResponseType(401)]
         [HttpGet]
-        public ActionResult GetDiets([FromQuery] PaginationDataParams pagination)
+        public ActionResult GetDiets([FromQuery] PaginationDataParams pagination,[FromQuery] List<Guid> categoryIds)
         {
-            var diets = _dietLogic.GetDiets(pagination);
+            var diets = _dietLogic.GetDiets(pagination,categoryIds);
             return Ok(diets);
         }
 

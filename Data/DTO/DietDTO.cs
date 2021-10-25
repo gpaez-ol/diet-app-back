@@ -10,6 +10,7 @@ namespace AlgoFit.Data.DTO
         public Guid Id {get;set;}
         public string Name { get; set; } // TODO; Add category
         public string ImageRef{ get; set; }
+        public List<Guid> CategoryIds {get;set;}
     }
     public class DietMealDTO 
     {

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AlgoFit.Data.DTO;
 using AlgoFit.Data.Models;
@@ -21,10 +22,26 @@ namespace AlgoFit.WebAPI.Logic
             _mapper = mapper;
         }
 
-        public IPaginationResult<DietItemDTO> GetDiets(PaginationDataParams pagination)
+        public IPaginationResult<DietItemDTO> GetDiets(PaginationDataParams pagination,List<Guid> categoryIds)
         {
-            var query = _repositoryManager.DietRepository.GetAllAsDTOs();
-            return query.ToPagination(pagination.Page, pagination.PageSize);
+            IQueryable<Diet> query = _repositoryManager.DietRepository.GetAllAsQueryable();
+           
+            if (categoryIds != null && categoryIds.Count > 0)
+            {
+                // Conditions
+                var predicate = LinqKit.PredicateBuilder.New<Diet>();
+                foreach(var categoryId in categoryIds)
+                predicate.Or(diet => diet.Categories.Any(dc => dc.CategoryId == categoryId));
+                query = query.Where(predicate);
+            } 
+            IQueryable<DietItemDTO> results = query.Select(diet => new DietItemDTO
+            {
+                Id = diet.Id,
+                Name = diet.Name,
+                ImageRef = diet.ImageRef,
+                CategoryIds = diet.Categories.Select(c => c.CategoryId.GetValueOrDefault()).ToList()
+            });
+            return results.ToPagination(pagination.Page, pagination.PageSize);
         }
 
         public async Task CreateDiet(DietCreateDTO newDiet)
