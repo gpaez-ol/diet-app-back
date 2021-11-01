@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AlgoFit.Data.DTO;
 using AlgoFit.Data.Models;
@@ -45,7 +46,19 @@ namespace AlgoFit.WebAPI.Logic
                         Kilocalories = newMeal.Kilocalories,
                         ImageRef = "https://thumbs.dreamstime.com/b/funny-chef-tomato-avatar-character-vector-illustration-design-94050856.jpg"
                         };
-                await _repositoryManager.MealRepository.AddAsync(meal);
+                meal = await _repositoryManager.MealRepository.AddAsync(meal);
+                meal.Ingredients = new List<MealIngredient>();
+                newMeal.MealIngredients.ForEach(mealIngredient =>
+                {
+                    var mIngredient = new MealIngredient
+                    {
+                        Notes = mealIngredient.Notes,
+                        Amount = mealIngredient.Amount,
+                        IngredientId = mealIngredient.IngredientId,
+                        MealId = meal.Id
+                    };
+                    meal.Ingredients.Add(mIngredient);
+                });
                 _repositoryManager.Save();
             }
             catch (Exception e)

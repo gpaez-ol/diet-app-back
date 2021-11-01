@@ -51,7 +51,12 @@ namespace AlgoFit.Repositories
         }
         public async Task<Meal> GetByIdAsync(Guid id)
         {
-            return await _context.Meals.Where(m => m.Id == id).Include(m => m.Ingredients).FirstOrDefaultAsync();
+            return await _context.Meals
+                    .Include( m => m.Ingredients)
+                    .ThenInclude(m => m.Ingredient)
+                    .Where(m => m.Id == id)
+                    .Include(m => m.Ingredients)
+                    .FirstOrDefaultAsync();
         }
         public async Task<ICollection<Meal>> GetAllAsync()
         {
@@ -64,7 +69,7 @@ namespace AlgoFit.Repositories
                     {
                         Id = m.Id,
                         Name = m.Name,
-                        Kilocalories = m.Kilocalories
+                        Kilocalories = m.Kilocalories,
                     });
         }
         public Task<Meal> DeleteAsync(Meal meal)
