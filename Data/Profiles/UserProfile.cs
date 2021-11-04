@@ -11,7 +11,7 @@ namespace AlgoFit.Data.Profiles
         {
             CreateMap<User, UserDTO>().ReverseMap();
             CreateMap<User, ProfileDTO>()
-                .ForMember(profile => profile.Type, opt => opt.MapFrom(user => EnumHelper.GetEnumText(UserType.Customer)));
+                .ForMember(profile => profile.Type, opt => opt.MapFrom(user => EnumHelper.GetEnumText(user.Type)));
             CreateMap<SignUpDTO, User>()
                 .ForMember(user => user.UserCredential,
                     opt => opt.MapFrom(signUp => new UserCredential
