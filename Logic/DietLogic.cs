@@ -22,18 +22,26 @@ namespace AlgoFit.WebAPI.Logic
             _mapper = mapper;
         }
 
-        public IPaginationResult<DietItemDTO> GetDiets(PaginationDataParams pagination,List<Guid> categoryIds)
+        public IPaginationResult<DietItemDTO> GetDiets(PaginationDataParams pagination,List<Guid> categoryIds,string searchText)
         {
             IQueryable<Diet> query = _repositoryManager.DietRepository.GetAllAsQueryable();
-           
-            if (categoryIds != null && categoryIds.Count > 0)
-            {
-                // Conditions
-                var predicate = LinqKit.PredicateBuilder.New<Diet>();
+           // Conditions
+            
+             
+           if (!(searchText == null || searchText.Length < 0))
+           {
+               var predicate = LinqKit.PredicateBuilder.New<Diet>();
+               predicate.Or(d => d.Name.Contains(searchText));
+               predicate.Or(d => d.Description.Contains(searchText));
+               query = query.Where(predicate);
+           }
+           if (categoryIds != null && categoryIds.Count > 0)
+            {   var predicate = LinqKit.PredicateBuilder.New<Diet>(); 
                 foreach(var categoryId in categoryIds)
                 predicate.Or(diet => diet.Categories.Any(dc => dc.CategoryId == categoryId));
                 query = query.Where(predicate);
-            } 
+            }
+
             IQueryable<DietItemDTO> results = query.Select(diet => new DietItemDTO
             {
                 Id = diet.Id,

@@ -28,9 +28,9 @@ namespace AlgoFit.WebAPI.Controllers
         [ProducesResponseType(typeof(object), 400)]
         [ProducesResponseType(401)]
         [HttpGet]
-        public ActionResult GetDiets([FromQuery] PaginationDataParams pagination,[FromQuery] List<Guid> categoryIds)
+        public ActionResult GetDiets([FromQuery] PaginationDataParams pagination,[FromQuery] List<Guid> categoryIds,[FromQuery] string searchText)
         {
-            var diets = _dietLogic.GetDiets(pagination,categoryIds);
+            var diets = _dietLogic.GetDiets(pagination,categoryIds,searchText);
             return Ok(diets);
         }
 
