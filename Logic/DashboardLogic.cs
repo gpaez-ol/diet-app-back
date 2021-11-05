@@ -37,7 +37,7 @@ namespace AlgoFit.WebAPI.Logic
                 Weight = b.Weight,
                 Height = b.Height, 
                 Date = b.Date
-                 }).ToList();
+                 }).OrderByDescending(b => b.Date).Take(10).ToList();
             var dashboardDTO = new DashboardDTO{
                         BiometricHistory = biometricHistory,
                         LatestBiometrics = latestBiometric
