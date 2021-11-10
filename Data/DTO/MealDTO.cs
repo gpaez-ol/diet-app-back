@@ -9,6 +9,8 @@ namespace AlgoFit.Data.DTO
         public Guid Id {get;set;}
         public string Name { get; set; }
         public double Kilocalories { get; set; }
+        public string Preparation { get; set; }
+        public List<string> Ingredients { get; set; }
     }
     public class MealIngredientDTO 
     {
