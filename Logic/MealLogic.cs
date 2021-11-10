@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AlgoFit.Data.DTO;
 using AlgoFit.Data.Models;
@@ -74,7 +75,31 @@ namespace AlgoFit.WebAPI.Logic
                 var oldMeal = await _repositoryManager.MealRepository.GetByIdAsync(mealId);
                 if (oldMeal != null)
                 {
-                    _mapper.Map(newMeal, oldMeal);
+                    var ingredientsToDelete = oldMeal.Ingredients.Where(i => newMeal.MealIngredients.All(mi => mi.IngredientId != i.IngredientId)).ToList();
+                    if(ingredientsToDelete.Count > 0)
+                    {
+                        foreach(var ingredientToDelete in ingredientsToDelete)
+                        {
+                            oldMeal.Ingredients.Remove(ingredientToDelete);
+                        }
+                     
+                    }
+                    var ingredientsToAdd = newMeal.MealIngredients.Where(mi => oldMeal.Ingredients.All(i => i.IngredientId != mi.IngredientId)).ToList();
+                    if(ingredientsToAdd.Count > 0 )
+                    {
+                        foreach(var ingredientToAdd in ingredientsToAdd)
+                        {
+                            var newMealIngredient = new MealIngredient{
+                                IngredientId = ingredientToAdd.IngredientId,
+                                Amount = ingredientToAdd.Amount,
+                                Notes = ingredientToAdd.Notes
+                            };
+                            oldMeal.Ingredients.Add(newMealIngredient);
+                        }
+                    }
+                    oldMeal.Name = newMeal.Name;
+                    oldMeal.Kilocalories = newMeal.Kilocalories;
+                    oldMeal.Preparation = newMeal.Preparation;
                     Meal updatedMeal = await _repositoryManager.MealRepository.UpdateAsync(oldMeal);
                     _repositoryManager.Save();
                     return _mapper.Map<MealDTO>(updatedMeal);
