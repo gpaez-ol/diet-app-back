@@ -54,6 +54,8 @@ namespace AlgoFit.Repositories
             return await _context.Diets.Where(d => d.Id == id)
                         .Include(d => d.Meals)
                         .ThenInclude(m => m.Meal)
+                        .Include(d => d.Categories)
+                        .ThenInclude(c => c.Category)
                         .FirstOrDefaultAsync();
         }
         public async Task<ICollection<Diet>> GetAllAsync()

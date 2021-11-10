@@ -31,7 +31,7 @@ namespace AlgoFit.Data.DTO
         public string Name { get; set; }
         [MaxLength(500)]
         public string Description { get; set; }
-        public ICollection<Guid> Categories { get; set; }
+        public ICollection<CategoryDTO> Categories { get; set; }
         public ICollection<MealItemDTO> Meals { get; set; }
         public DietType Type { get; set; }
         public string ImageRef{ get; set; }

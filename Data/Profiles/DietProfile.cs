@@ -19,6 +19,15 @@ namespace AlgoFit.Data.Profiles
                     Name = meal.Meal.Name,
                     Kilocalories = meal.Meal.Kilocalories
                 }
+                )))
+                .ForMember(dto => dto.Categories,
+                opt => opt.MapFrom(diet => diet.Categories
+                .Select(category => new CategoryDTO
+                {
+                    Id = category.CategoryId.GetValueOrDefault(),
+                    Name = category.Category.Name,
+                    Description = category.Category.Description
+                }
                 ))).ReverseMap();
             CreateMap<Diet, DietCreateDTO>().ReverseMap();
         }
