@@ -19,7 +19,7 @@ namespace AlgoFit.WebAPI.Logic
         {
             var user = await _repositoryManager.UserRepository.GetUserByIdAsync(userId);
             var eatenCalories =  0.0;
-            if(user.Diet != null)
+            if(user.Diet != null && (user.Diet.Meals != null || user.Diet.Meals.Count > 0))
             {
                 var passedDays = (DateTime.Today - user.DietStartedAt.GetValueOrDefault()).Days;
 ;                eatenCalories = user.Diet.Meals.OrderBy(dm => dm.MealNumber).Take(passedDays*3).Sum(dm => dm.Meal.Kilocalories);
