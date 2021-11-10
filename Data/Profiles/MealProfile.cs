@@ -10,7 +10,7 @@ namespace AlgoFit.Data.Profiles
         public MealProfile()
         {
             CreateMap<Meal, MealDTO>()
-            .ForMember(dto => dto.Ingredients,
+            .ForMember(dto => dto.MealIngredients,
                 opt => opt.MapFrom(diet => diet.Ingredients
                 .Select(meal => new MealIngredientDetailDTO
                 {
