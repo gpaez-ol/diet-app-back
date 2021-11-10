@@ -10,8 +10,8 @@ namespace AlgoFit.Data.DTO
         public string Name { get; set; }
         public double Kilocalories { get; set; }
         public string Preparation { get; set; }
-        public List<string> MealIngredients { get; set; }
-    }
+        public List<MealIngredientDTO > MealIngredients { get; set; }
+    } 
     public class MealIngredientDTO 
     {
         public Guid IngredientId {get;set;}
@@ -24,7 +24,7 @@ namespace AlgoFit.Data.DTO
         public double Kilocalories { get; set; }
         [MaxLength(500)]
         public string Preparation { get; set; }
-        public List<MealIngredientDTO > MealIngredients {get; set;}
+        public List<MealIngredientDTO> MealIngredients {get; set;}
     }
     public class MealIngredientDetailDTO
     {

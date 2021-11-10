@@ -72,7 +72,11 @@ namespace AlgoFit.Repositories
                         Kilocalories = m.Kilocalories,
                         Preparation = m.Preparation,
                         MealIngredients = m.Ingredients
-                        .Select(mi => mi.Amount.ToString() + " - " + mi.Ingredient.Name).ToList()
+                        .Select(mi => new MealIngredientDTO{
+                         IngredientId = mi.IngredientId,
+                         Amount = mi.Amount,
+                         Notes = mi.Notes
+                        }).ToList()
                     });
         }
         public Task<Meal> DeleteAsync(Meal meal)
