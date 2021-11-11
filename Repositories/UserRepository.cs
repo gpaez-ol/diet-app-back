@@ -59,7 +59,12 @@ namespace AlgoFit.Repositories
         }
         public async Task<User> GetUserByIdAsync(Guid id)
         {
-            return (await GetAllAsync()).Include(u => u.Diet).ThenInclude(d => d.Meals).ThenInclude(dm => dm.Meal).FirstOrDefault(x => x.Id == id);
+            return (await GetAllAsync()).Include(u => u.Diet)
+            .ThenInclude(d => d.Meals)
+            .ThenInclude(dm => dm.Meal)
+            .ThenInclude(m => m.Ingredients)
+            .ThenInclude(i => i.Ingredient
+            ).FirstOrDefault(x => x.Id == id);
         }
         public async Task<IQueryable<User>> GetAllAsync()
         {

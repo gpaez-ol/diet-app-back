@@ -22,6 +22,38 @@ namespace AlgoFit.WebAPI.Logic
             _mapper = mapper;
         }
 
+        public async Task<List<SupermarketItemDTO>> GetSupermarketList(Guid userId) 
+        {
+            var user = await _repositoryManager.UserRepository.GetUserByIdAsync(userId);
+            var supermarketItemList = new List<SupermarketItemDTO>();
+            if(user.Diet != null && (user.Diet.Meals != null || user.Diet.Meals.Count > 0))
+            {
+                var passedDays = (DateTime.Today - user.DietStartedAt.GetValueOrDefault()).Days;
+                var eatenMeals = passedDays * 3;
+                var supermarketItems = user.Diet.Meals
+                                .OrderBy(dm => dm.MealNumber)
+                                .Skip(eatenMeals)
+                                .Take(3*7)
+                                .SelectMany(dm => dm.Meal.Ingredients
+                                    .Select(mi => 
+                                    new SupermarketItemDTO
+                                    {
+                                      Id = mi.IngredientId,
+                                      Name = mi.Ingredient.Name,
+                                      Amount = mi.Amount
+                                    }).ToList()).ToList();
+                foreach(var supermarketItem in supermarketItems.GroupBy(si => si.Id).ToList().Select(si => si.First()))
+                {
+                    supermarketItemList.Add(new SupermarketItemDTO
+                    {
+                        Id = supermarketItem.Id,
+                        Name = supermarketItem.Name,
+                        Amount = supermarketItems.Where(si => si.Id == supermarketItem.Id).Sum(si => si.Amount)
+                    });
+                }
+            }
+                            return supermarketItemList;
+        }
         public IPaginationResult<DietItemDTO> GetDiets(PaginationDataParams pagination,List<Guid> categoryIds,string searchText)
         {
             IQueryable<Diet> query = _repositoryManager.DietRepository.GetAllAsQueryable();
