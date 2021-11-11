@@ -22,6 +22,7 @@ namespace AlgoFit.Data.Profiles
                 )))
                 .ForMember(dto => dto.Categories,
                 opt => opt.MapFrom(diet => diet.Categories
+                .Where(category => category.CategoryId != null && category.Category != null)
                 .Select(category => new CategoryDTO
                 {
                     Id = category.CategoryId.GetValueOrDefault(),
