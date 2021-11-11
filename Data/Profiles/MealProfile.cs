@@ -15,7 +15,7 @@ namespace AlgoFit.Data.Profiles
                 .Select(meal => new MealIngredientDetailDTO
                 {
                     IngredientId = meal.IngredientId,
-                    Name =  meal.Ingredient.Name,
+                    Name =  meal.Ingredient != null ? meal.Ingredient.Name  : "",
                     Amount = meal.Amount,
                     Notes = meal.Notes,
                 }

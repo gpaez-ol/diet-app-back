@@ -55,7 +55,6 @@ namespace AlgoFit.Repositories
                     .Include( m => m.Ingredients)
                     .ThenInclude(m => m.Ingredient)
                     .Where(m => m.Id == id)
-                    .Include(m => m.Ingredients)
                     .FirstOrDefaultAsync();
         }
         public async Task<ICollection<Meal>> GetAllAsync()
