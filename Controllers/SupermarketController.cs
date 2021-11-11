@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AlgoFit.Data.DTO;
 using Microsoft.AspNetCore.Mvc;
 using AlgoFit.WebAPI.Logic;
+using System.Collections.Generic;
 
 namespace AlgoFit.WebAPI.Controllers
 {
@@ -18,11 +19,11 @@ namespace AlgoFit.WebAPI.Controllers
         }
 
         /// <summary>
-        /// GetD Diet Ingredients
+        /// Get Supermarket Ingredient List
         /// </summary>
         /// <returns>Ok()</returns>
         [ProducesResponseType(200)]
-        [ProducesResponseType(typeof(DietDTO), 400)]
+        [ProducesResponseType(typeof(List<SupermarketItemDTO>), 400)]
         [ProducesResponseType(401)]
         [HttpGet("{userId}")]
         public async Task<ActionResult> GetSupermarketList(Guid userId)
