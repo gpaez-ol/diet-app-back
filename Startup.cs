@@ -48,11 +48,12 @@ namespace AlgoFit
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AlgoFit", Version = "v1" });
             });
-            services.AddCorsPolicyAllowedHostWithCredentials(
-                Configuration.GetSection("AllowedHosts").Get<string[]>(),
-                new string[] { "GET", "PUT", "POST", "DELETE" },
-                new string[] { "Content-Type", "Content-Length" }
-            );
+            services.AddCors();
+            // services.AddCorsPolicyAllowedHostWithCredentials(
+            //     Configuration.GetSection("AllowedHosts").Get<string[]>(),
+            //     new string[] { "GET", "PUT", "POST", "DELETE" },
+            //     new string[] { "Content-Type", "Content-Length" }
+            // );
               services.AddDbContext<AlgoFitContext>(
                  opt => ConfigureDatabaseService(opt),
                  ServiceLifetime.Scoped
@@ -87,7 +88,9 @@ namespace AlgoFit
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseExceptionHandler(err => ExceptionHandler.UseAlgoFitExceptionHandler(err));
-            app.UseCors("CorsPolicyAllowedHostWithCredentials");
+            app.UseCors(
+                options => options.AllowAnyOrigin().AllowAnyMethod()
+            );
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AlgoFit v1"));
         
