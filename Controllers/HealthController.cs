@@ -1,12 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using AlgoFit.Data.DTO;
-using AlgoFit.Data.Models;
-using AlgoFit.Utils.Enums;
 namespace AlgoFit.Controllers
 {
     [ApiController]
