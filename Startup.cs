@@ -50,7 +50,7 @@ namespace AlgoFit
             });
             services.AddCorsPolicyAllowedHostWithCredentials(
                 Configuration.GetSection("AllowedHosts").Get<string[]>(),
-                new string[] { "GET", "PUT", "POST", "DELETE", "FETCH" },
+                new string[] { "GET", "PUT", "POST", "DELETE" },
                 new string[] { "Content-Type", "Content-Length" }
             );
               services.AddDbContext<AlgoFitContext>(
