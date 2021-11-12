@@ -16,7 +16,7 @@ namespace AlgoFit.Security.Extensions
                     builder =>
                     {
                         builder
-                            .WithOrigins(origins)
+                            .WithOrigins("*","http://possession-portion-process-depends.trycloudflare.com/")
                             .WithMethods(allowedMethods)
                             .WithHeaders(allowedHeaders)
                             .AllowCredentials();
