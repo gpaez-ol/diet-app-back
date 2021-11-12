@@ -89,7 +89,7 @@ namespace AlgoFit
         {
             app.UseExceptionHandler(err => ExceptionHandler.UseAlgoFitExceptionHandler(err));
             app.UseCors(
-                options => options.AllowAnyOrigin().AllowAnyMethod()
+                options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
             );
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AlgoFit v1"));
