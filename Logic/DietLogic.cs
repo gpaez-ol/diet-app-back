@@ -28,8 +28,15 @@ namespace AlgoFit.WebAPI.Logic
             var supermarketItemList = new List<SupermarketItemDTO>();
             if(user.Diet != null && (user.Diet.Meals != null || user.Diet.Meals.Count > 0))
             {
+                var totalDietMeals = user.Diet.Meals.Count; 
                 var passedDays = (DateTime.Today - user.DietStartedAt.GetValueOrDefault()).Days;
                 var eatenMeals = passedDays * 3;
+                if(eatenMeals > totalDietMeals)
+                {
+                    user.DietStartedAt = DateTime.Today;
+                    eatenMeals = 0;
+                    await _repositoryManager.UserRepository.UpdateAsync(user);
+                }
                 var supermarketItems = user.Diet.Meals
                                 .OrderBy(dm => dm.MealNumber)
                                 .Skip(eatenMeals)
